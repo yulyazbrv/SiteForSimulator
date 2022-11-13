@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link href="../styles.css" rel="stylesheet" />
+    <link href="./styles.css" rel="stylesheet" />
+    <title>Structure</title>
+  </head>
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<script src="test1karta.js?1664955597605"></script>
+<script>
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function init() {
+	canvas = document.getElementById("canvas");
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("598516DDEF62644183E1FAAA9E4A70DC");
+	var lib=comp.getLibrary();
+	var loader = new createjs.LoadQueue(false);
+	loader.installPlugin(createjs.Sound);
+	loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
+	loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+	var lib=comp.getLibrary();
+	loader.loadManifest(lib.properties.manifest);
+}
+function handleFileLoad(evt, comp) {
+	var images=comp.getImages();	
+	if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }	
+}
+function handleComplete(evt,comp) {
+	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+	var lib=comp.getLibrary();
+	var ss=comp.getSpriteSheet();
+	var queue = evt.target;
+	var ssMetadata = lib.ssMetadata;
+	for(i=0; i<ssMetadata.length; i++) {
+		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+	}
+	exportRoot = new lib.test1karta();
+	stage = new lib.Stage(canvas);
+	stage.enableMouseOver();	
+	//Registers the "tick" event listener.
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.framerate = lib.properties.fps;
+		createjs.Ticker.addEventListener("tick", stage);
+	}	    
+	//Code to support hidpi screens and responsive scaling.
+	AdobeAn.makeResponsive(false,'both',false,1,[canvas,anim_container,dom_overlay_container]);	
+	AdobeAn.compositionLoaded(lib.properties.id);
+	fnStartAnimation();
+}
+function playSound(id, loop, offset) {
+	return createjs.Sound.play(id, {'interrupt':createjs.Sound.INTERRUPT_EARLY, 'loop': loop, 'offset': offset});}
+</script>
+  <body>
+    <header class="header">
+      <a class="header-link" href="../main.html">Главная</a
+      ><a class="header-link" href="../theory/index.html">Теория</a
+      ><a class="header-link" href="../structure/index.html">Структура</a
+      ><a class="header-link" href="../simulator/index.html">Симулятор</a
+      ><a class="header-link" href="../contacts/index.html">Контакты</a>
+    </header>
+
+  </body>
+  <div class="main-content">
+    <div class="cooker-wrapper">
+      <img src="./image1.png"  class='zoom-image'/>
+      <p>Изображение установки</p>
+    </div>
+    <div class="cooker-structure-wrapper">
+      <img src="./image2.png" class='zoom-image' />
+      <a href="../map/test1karta.html">Структура установки</a>
+      <a href="../rolik/test100.html">Ролик установки</a>
+      <p>
+        Расшифруем обозначения: регулятор мощности; 1. регулятор мощности; 2.
+        клеммная коробка; 3. конфорка; 4. опорная планка; 5. датчик температуры
+        духовки; 6. петля; 7. стопор; 8. держатель тэна духовки; 9. тэн духовки;
+        10. внутренняя облицовочная панель; 11. фиксатор защелки дверцы; 12.
+        гнездо защелки; 13. изолирующая прокладка; 14. тэн для гриля; 15. ободок
+        конфорки; 16. шнур электропитания; 17. земляная клемма; 18.
+        регулировочные ручки.
+      </p>
+    </div>
+    <h2 class="order">ПОРЯДОК ВЫПОЛНЕНИЯ РАБОТЫ</h2>
+    <ul>
+      <li class="list-item">
+        Ознакомиться с элементами установки «Электроплита»
+      </li>
+      <li class="list-item">
+        Включить одну из комфорок на плите при помощи регулятора мощности на
+        необходимую мощность
+      </li>
+      <li class="list-item">Поставить на комфорку сковородку</li>
+      <li class="list-item">
+        Подождать заданное количество времени для нагрева сковородки от
+        электроплиты
+      </li>
+      <li class="list-item">Выложить необходимый продукт для жарки</li>
+      <li class="list-item">
+        Подождать необходимое количество времени до полного приготовления
+      </li>
+      <li class="list-item">Выключить установку «Электроплита».</li>
+      <li class="list-item">Дождаться полного остывания комфорки</li>
+    </ul>
+  </div>
+</html>

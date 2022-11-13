@@ -1,0 +1,46 @@
+.main-content {
+  width: calc(100% - 180px);
+  margin-left: 120px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 30px 30px;
+}
+
+.cooker-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+}
+
+.cooker-structure-wrapper {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  max-width: 600px;
+}
+
+.order {
+  align-self: center;
+  margin-top: 60px;
+}
+
+.list-item {
+  padding-bottom: 10px;
+}
+
+.list-item:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.zoom-image {
+  cursor: pointer;
+}
+
+.zoom-image:hover {
+  zoom: 1.2;
+}

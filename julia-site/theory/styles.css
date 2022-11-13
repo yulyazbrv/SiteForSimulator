@@ -1,0 +1,39 @@
+.main-content {
+  width: calc(100% - 180px);
+  margin-left: 120px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 30px;
+}
+
+.text {
+  font-size: 17px;
+  letter-spacing: 1px;
+  line-height: 20px;
+}
+
+.title {
+  align-self: center;
+}
+
+.cooker-image,
+.lenc-image,
+.plate-image,
+.oven-image {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(40, 46, 61, 0.4);
+}
+
+.cooker-text,
+.lenc {
+  cursor: pointer;
+  font-style: italic;
+}
